@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Cover</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			  </ol>
+			 
+			  <!-- Wrapper for slides -->
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+//get all images
+$images = glob('picam/*.jpg', GLOB_BRACE); //formats to look for
+$num_of_files = 10; //number of images to display
+
+//stats
+//echo "Images: ". count($images). " | ";
+
+$lastImage = new DateTime(date('Y-m-d h:i', filemtime(end($images))));
+$firstImage =  new DateTime(date('Y-m-d h:i', filemtime($images[0])));
+
+$interval = $lastImage->diff($firstImage);
+//echo $interval->format('Timespan between first and last image: %a days, %h hours, %i minutes</br>');
+
+krsort($images);
+
+//show photos
+foreach($images as $image)
+    {
+         $num_of_files--;
+
+         if($num_of_files > -1) //this made me laugh when I wrote it
+			echo "<div class=\"carousel-inner\">"
+			echo "<div class=\"item active\"><img src=\"."'".$image."'"."	
+			echo "<div class=\"carousel-caption\">"
+			echo "<h3>Caption Text".$image."Created on ".date('D, d M y H:i:s', filemtime($image)) ."</h3>"		   
+			echo "</div>"
+			echo "</div>" ; //display images
+         else
+           break;
+    }
+?>
+			 
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			  </a>
+</div> <!-- Carousel -->
+
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+  </body>
+</html>

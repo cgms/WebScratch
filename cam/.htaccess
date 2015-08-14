@@ -1,0 +1,4 @@
+Authtype Basic
+AuthName "Webcam auth"
+AuthUserFile /var/www/cam/.htpasswd
+Require valid-user
